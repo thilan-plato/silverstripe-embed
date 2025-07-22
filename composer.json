@@ -20,7 +20,7 @@
   ],
   "homepage": "https://github.com/PlatoCreative/silverstripe-embed",
   "require": {
-    "silverstripe/framework": "^4",
+    "silverstripe/framework": "^5",
     "plato-creative/silverstripe-htmltag": "^1.0"
   },
   "repositories": [

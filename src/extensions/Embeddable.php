@@ -17,6 +17,7 @@ use SilverStripe\ORM\ValidationResult;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\SSViewer;
 use SilverStripe\Security\Member;
+use SilverStripe\i18n\i18n;
 use Embed\Embed;
 use gorriecoe\HTMLTag\View\HTMLTag;
 
@@ -157,7 +158,7 @@ class Embeddable extends DataExtension
                 'choose_bigger_image' => true,
             ];
             $embed = new Embed();
-            $info=$embed->get($sourceURL);
+            $info = $embed->get($sourceURL);
             $oembed = $info->getOEmbed();
             if ($owner->EmbedTitle == '') {
                 $owner->EmbedTitle = $info->title;
@@ -177,7 +178,6 @@ class Embeddable extends DataExtension
                     $fileExplode = explode('.', $info->getOEmbed()->get('thumbnail_url').'.png');
                     $fileExtensionExplode = explode('?', end($fileExplode));
                     $fileExtension = $fileExtensionExplode[0];
-                    $fileExtensionQuery = $fileExtensionExplode[0];
                     $fileName = Convert::raw2url($owner->obj('EmbedTitle')->LimitCharacters(55)) . '.' . $fileExtension;
                     $parentFolder = Folder::find_or_make($owner->EmbedFolder);
 
@@ -235,13 +235,13 @@ class Embeddable extends DataExtension
         $sourceURL = $owner->EmbedSourceURL;
         if ($sourceURL && isset($allowed_types)) {
             $embed = new Embed();
-            $info=$embed->get($sourceURL);
+            $info = $embed->get($sourceURL);
             $oembed = $info->getOEmbed();
             if (!in_array($oembed->get('type'), $allowed_types)) {
                 $string = implode(', ', $allowed_types);
                 $string = (substr($string, -1) == ',') ? substr_replace($string, ' or', -1) : $string;
                 $validationResult->addError(
-                    _t(__CLASS__ . '.ERRORNOTSTRING', "The embed content is not a $string")
+                    _t(__CLASS__ . '.ERRORNOTSTRING', "The embed content is not a {type}", ['type' => $string])
                 );
             }
         }

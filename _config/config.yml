@@ -1,3 +1,5 @@
 ---
 Name: embedconfig
 ---
+SilverStripe\Core\Manifest\ModuleManifest:
+  project: true

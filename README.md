@@ -4,6 +4,8 @@
 
 Adds embed and video a dataobject along with dataextension to apply embed to existing objects.
 
+**This module is now compatible with Silverstripe 5!**
+
 ## Installation
 Composer is the recommended way of installing SilverStripe modules.
 ```
@@ -12,7 +14,7 @@ composer require gorriecoe/silverstripe-embed
 
 ## Requirements
 
-- silverstripe/framework ^4.0
+- silverstripe/framework ^5.0
 
 ## Maintainers
 

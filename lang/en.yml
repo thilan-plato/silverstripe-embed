@@ -1,6 +1,7 @@
 en:
   gorriecoe\Embed\Extensions\Embeddable:
     DESCRIPTIONLABEL: Description
+    ERRORNOTSTRING: 'The embed content is not a {type}'
     IMAGELABEL: Image
     SOURCEURLDESCRIPTION: 'Specify a external URL'
     SOURCEURLLABEL: 'Source URL'
