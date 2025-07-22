@@ -6,6 +6,11 @@ Adds embed and video a dataobject along with dataextension to apply embed to exi
 
 **This module is now compatible with Silverstripe 5!**
 
+## Changes in Silverstripe 5 Version
+- Removed dependency on `plato-creative/silverstripe-htmltag` to resolve compatibility issues
+- Added direct dependency on `embed/embed` library
+- Replaced HTMLTag usage with native HTML generation for better compatibility
+
 ## Installation
 Composer is the recommended way of installing SilverStripe modules.
 ```

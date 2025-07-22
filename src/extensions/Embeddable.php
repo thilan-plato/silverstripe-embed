@@ -19,7 +19,6 @@ use SilverStripe\View\SSViewer;
 use SilverStripe\Security\Member;
 use SilverStripe\i18n\i18n;
 use Embed\Embed;
-use gorriecoe\HTMLTag\View\HTMLTag;
 
 /**
  * Embeddable
@@ -321,22 +320,21 @@ class Embeddable extends DataExtension
         if (SSViewer::hasTemplate($templates)) {
             return $owner->renderWith($templates);
         }
+        $classAttr = $class ? ' class="' . htmlspecialchars($class) . '"' : '';
+        
         switch ($type) {
             case 'video':
             case 'rich':
-                $html = HTMLTag::create($embedHTML, 'div');
-                break;
+                return '<div' . $classAttr . '>' . $embedHTML . '</div>';
             case 'link':
-                $html = HTMLTag::create($title, 'a')->setAttribute('href', $sourceURL);
-                break;
+                return '<a href="' . htmlspecialchars($sourceURL) . '"' . $classAttr . '>' . htmlspecialchars($title) . '</a>';
             case 'photo':
-                $html = HTMLTag::create($sourceURL, 'img')->setAttribute([
-                    'width' => $this->Width,
-                    'height' => $this->Height,
-                    'alt' => $title
-                ]);
-                break;
+                $widthAttr = $owner->EmbedWidth ? ' width="' . htmlspecialchars($owner->EmbedWidth) . '"' : '';
+                $heightAttr = $owner->EmbedHeight ? ' height="' . htmlspecialchars($owner->EmbedHeight) . '"' : '';
+                $altAttr = $title ? ' alt="' . htmlspecialchars($title) . '"' : '';
+                return '<img src="' . htmlspecialchars($sourceURL) . '"' . $widthAttr . $heightAttr . $altAttr . $classAttr . '>';
+            default:
+                return '<div' . $classAttr . '>' . htmlspecialchars($embedHTML) . '</div>';
         }
-        return $html->setClass($class);
     }
 }
